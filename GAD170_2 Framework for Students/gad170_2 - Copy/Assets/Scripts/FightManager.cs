@@ -15,6 +15,11 @@ using UnityEngine;
 /// 
 
     // BattleHandler stuff 
+
+
+
+
+
 public class FightManager : MonoBehaviour
 {
     public Color drawCol = Color.gray;
@@ -46,10 +51,49 @@ public class FightManager : MonoBehaviour
         yield return new WaitForSeconds(fightAnimTime);
 
         float outcome = 0;
-
+        Character winner = lhs, defeated = rhs;
         //Do this one second!
         //can re-use code from battle n battlehandler
 
+        // Debug log will show the player stats and NPC
+
+        Debug.Log("The NPC Rhythm stats is " + lhs.rhythm);
+        Debug.Log("The NPC Style stats is " + lhs.style);
+        Debug.Log("The NPC Luck stats is " + lhs.luck);
+        Debug.Log("The Player Style stats is " + rhs.style); //combine them add or times them
+        Debug.Log("The Player Luck stats is " + rhs.luck); //random role
+        Debug.Log("The Player Rhythm stats is " + rhs.rhythm); // combine them add or times them
+
+
+        // if the player has a higher style then the NPC then the player will add 1 to the player_has_one score
+        int lhs_has_won = 0;
+        if (rhs.style >= lhs.style)
+            lhs_has_won += 1;
+
+        // if the player has a higher luck then the NPC then the player will add 1 to the player_has_one score
+        if (rhs.luck >= lhs.luck)
+            lhs_has_won += 1;
+
+        // if the player has a higher rhythm then the NPC then the player will add 1 to the player_has_one score
+        if (rhs.rhythm >= lhs.rhythm)
+            lhs_has_won += 1;
+
+
+        //the outcome of the battle
+        if (lhs_has_won >= 2)
+            outcome = 1;
+
+        if (outcome == 1)
+        {
+            winner = lhs;
+            defeated = rhs;
+        }
+        else
+        {
+            winner = rhs;
+            defeated = lhs;
+
+        }
         // debug the left hand side character stats
         Debug.Log(lhs.rhythm);
         Debug.Log(lhs.style);
@@ -58,8 +102,20 @@ public class FightManager : MonoBehaviour
         Debug.Log(rhs.style);
         Debug.Log(rhs.luck);
 
+
+
+        //somewhere here you are setting outcome
+        //todo: when you set outcome
+        // also set winner & defeated
+
+
+        //example
+        //outcome = 1;
+        //winner = lhs;
+        //defeated = rhs;
+
         //defaulting to draw 
-        Character winner = lhs, defeated = rhs;
+     
         Debug.LogWarning("Attack called, needs to use character stats to determine winner with win strength from 1 to -1. This can most likely be ported from previous brief work.");
 
 

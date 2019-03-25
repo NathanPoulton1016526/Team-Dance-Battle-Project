@@ -29,12 +29,25 @@ public class CharacterNameGenerator : ScriptableObject
     {
         CharacterName[] names = new CharacterName[namesNeeded];
 
+        //access the first fristname
+        Debug.Log(firstNames[0]);
+
         //TODO - filling this with empty names so the rest of our code is safe to run without need for many null checks
         CharacterName emptyName = new CharacterName(string.Empty, string.Empty, string.Empty, string.Empty);
         for (int i = 0; i < names.Length; i++)
         {
-            names[i] = emptyName;
+            // todo for week 7 - do this 4th ---DONE---
+            // make use of the firstnames, lastname, nick names and descriptors list
+            int RandomFirstNameIndex = Random.Range(0, firstNames.Count);
+            int RandomLastNameIndex = Random.Range(0, lastNames.Count);
+            int RandomNickNameIndex = Random.Range(0, nicknames.Count);
+            int RandomDescriptorsIndex = Random.Range(0, descriptors.Count);
+            
+
+            names[i] = new CharacterName(firstNames[RandomFirstNameIndex], lastNames[RandomLastNameIndex], nicknames[RandomNickNameIndex], descriptors[RandomDescriptorsIndex]);
+
         }
+
 
         Debug.LogWarning("CharacterNameGenerator called, it needs to fill out the names array with unique randomly constructed character names");
 

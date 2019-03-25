@@ -43,18 +43,16 @@ public class Character : MonoBehaviour
     {
 
         // all character start at level 1
-        stats.level = 1;
+        level = 1;
 
-        //assign initial stats
-        StatsGenerator.InitialStats(this);
 
         //Start at 0 XP points
-        stats.xp = 0;
+        xp = 0;
 
         // all characters will start with a number of 1 - 6 
-        stats.rhythm = Random.Range(1, 6);
-        stats.luck = Random.Range(1, 6);
-        stats.style = Random.Range(1, 6);
+        rhythm = Random.Range(1, 6);
+        luck = Random.Range(1, 6);
+        style = Random.Range(1, 6);
 
 
         Debug.Log(rhythm);
