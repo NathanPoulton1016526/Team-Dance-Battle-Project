@@ -36,14 +36,14 @@ public class CharacterNameGenerator : ScriptableObject
         CharacterName emptyName = new CharacterName(string.Empty, string.Empty, string.Empty, string.Empty);
         for (int i = 0; i < names.Length; i++)
         {
-            // todo for week 7 - do this 4th ---DONE---
-            // make use of the firstnames, lastname, nick names and descriptors list
+            
+            // sets the firstnames, lastname, nick names and descriptors list of each dancer
             int RandomFirstNameIndex = Random.Range(0, firstNames.Count);
             int RandomLastNameIndex = Random.Range(0, lastNames.Count);
             int RandomNickNameIndex = Random.Range(0, nicknames.Count);
             int RandomDescriptorsIndex = Random.Range(0, descriptors.Count);
             
-
+            //apply its to dancer
             names[i] = new CharacterName(firstNames[RandomFirstNameIndex], lastNames[RandomLastNameIndex], nicknames[RandomNickNameIndex], descriptors[RandomDescriptorsIndex]);
 
         }

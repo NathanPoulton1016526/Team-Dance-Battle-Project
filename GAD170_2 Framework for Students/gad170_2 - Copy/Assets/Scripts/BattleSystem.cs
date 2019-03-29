@@ -14,7 +14,8 @@ using UnityEngine;
 ///     This may be where characters are set as selected when they are in a dance off and when they leave the dance off
 /// </summary>
 public class BattleSystem : MonoBehaviour
-{
+{ 
+    //adding public class to the script
     public DanceTeam TeamA,TeamB;
 
     public float battlePrepTime = 2;
@@ -22,6 +23,7 @@ public class BattleSystem : MonoBehaviour
     public Character TeamAFighters;
     public Character TeamBFighters;
 
+    // assisning gameevent to names e.g FightOver
     private void OnEnable()
     {
         GameEvents.OnRequestFighters += RoundRequested;
@@ -39,13 +41,13 @@ public class BattleSystem : MonoBehaviour
         //calling the coroutine so we can put waits in for anims to play
         StartCoroutine(DoRound());
     }
-    //messing with doround
+    //messing with do round
     IEnumerator DoRound()
     {
         yield return new WaitForSeconds(battlePrepTime);
 
         //checking for no dancers on either team
-
+        //startes the round and grabs 2 random dancers 1 from each teams 
         if (TeamA.activeDancers.Count > 0 && TeamB.activeDancers.Count > 0)
         {
             Debug.LogWarning("DoRound called, it needs to select a dancer from each team to dance off and put in the FightEventData below");
@@ -60,28 +62,19 @@ public class BattleSystem : MonoBehaviour
 
 
 
-            //TODO pick a dancer from Team A and a dancer from Team B
-            // Use the Line of code below to start the fight
-            // a and b should be replaced with variables you create
-            // to hold the dancer from each team
-            //
+        
 
         }
         else
         {
-            //TODO: Work out who the winning team is
-            //HINT: you have access to the number of dancers in each team
-            // TeamA.activedancers >= 0;
-            // TeamB.activedancers >= 0;
-            //GameEvents.BattleFinished(winner);
-            //winner.EnableWinEffects();
+            // set the win effect to team B
             if (TeamA.activeDancers.Count >= 0)
             {
                 GameEvents.BattleFinished(TeamB);
                 TeamB.EnableWinEffects();
                 Debug.Log("Team B IS THE WINNER");
             }
-
+            //set the win effect to team A
             else if (TeamB.activeDancers.Count >= 0)
             {
                 GameEvents.BattleFinished(TeamA);
@@ -95,14 +88,12 @@ public class BattleSystem : MonoBehaviour
     }
 
 
-    //messing with fightover
+    //End of the fight
     void FightOver(FightResultData data)
     {
         Debug.LogWarning("FightOver called, may need to check for winners and/or notify teams of zero mojo dancers");
 
-        // TODO - CHeck if the Battle is over
-        // ONLY do wthe win effects and remove from active
-        // if the outcome is valid (ie. not for a draw)
+
         Debug.Log(data.outcome);
         if (data.outcome <= 0)
         {
